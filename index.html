@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis XV Años - Lara</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+    /* 🍷 PALETA DE COLORES BORDÓ Y DORADO 🍷 */
+    :root {
+        /* FONDOS MÁS CLAROS: Menos sombrío, más elegante */
+        --color-primary: #9E2A44; /* Bordó MUCHO MÁS CLARO Y VIBRANTE */
+        --color-secondary-bg: #400d1e; /* Fondo de sección oscuro, ajustado al nuevo primario */
+        --color-accent: #FFD700; /* ✨ DORADO PURO (Acento) */
+        --color-accent-dark: #ccaa00; /* Dorado para hover/sombra */
+        --color-text: #f4f4f9;
+        --color-burgundy: #73172E; /* Bordo para tarjetas, basado en el nuevo primario */
+        --color-whatsapp-green: #22c55e;
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: var(--color-primary);
+        color: var(--color-text);
+        transition: background-color 0.5s ease;
+    }
+
+    /* --- ESTILOS DE FONDO DE LUCIÉRNAGAS DORADAS --- */
+    .firefly-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: -10;
+        /* Degradado radial más claro que el negro absoluto */
+        background: radial-gradient(ellipse at bottom, #38020d 0%, var(--color-primary) 100%);
+    }
+    .firefly-layer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* ⭐ AJUSTE DE ESPACIADO DE SECCIONES ⭐ */
+    .section-container {
+        max-width: 1800px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 5rem 1.5rem;
+    }
+
+    /* 🏆 EFECTO DE TEXTO DORADO METÁLICO AVANZADO 🏆 */
+    .text-metallic-gold {
+        color: rgb(218,165,32);
+        background: -webkit-linear-gradient(transparent, transparent),
+                        -webkit-linear-gradient(top, var(--color-accent) 0%, rgba(255,230,150,1) 26%, var(--color-accent-dark) 45%, var(--color-accent) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .with-shadow {
+        /* Sombra más sutil con el fondo más claro */
+        text-shadow: 0px 0px 15px rgba(255, 215, 0,.6), 0px 0px 5px rgba(255, 215, 0,.3);
+    }
+
+    #lara-name {
+        font-family: 'Dancing Script', cursive;
+    }
+
+    /* 🔥 HEADER CON IMAGEN DE FONDO FLORAL Y BLOOM 🔥 */
+    header {
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+            background-image: url('imagen-floral-header2.png'); /* Usamos la ruta local */
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        /* Un degradado más suave para la imagen de fondo, para que el bloom destaque más */
+        background-color: rgba(0, 0, 0, 0.2);
+        background-blend-mode: overlay;
+    }
+
+    /* --- NUEVO: EFECTO FLORECER/EXPLOSIÓN MÁXIMA (600px) --- */
+    .extravagant-bloom {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 600px;
+        height: 600px;
+        z-index: 0; /* Asegura que esté *detrás* del texto, pero *encima* del fondo floral */
+        filter: drop-shadow(0 0 100px rgba(255, 215, 0, 0.8)) drop-shadow(0 0 50px rgba(255, 255, 255, 0.4)); /* Sombra un poco más suave */
+        animation: bloom-surge 3s ease-out forwards,
+                   bloom-pulse 10s ease-in-out infinite 3s;
+        opacity: 0;
+    }
+
+    /* El núcleo del resplandor */
+    .bloom-core {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: radial-gradient(circle at center, rgba(255, 100, 100, 0.6) 0%, rgba(210, 0, 0, 0.4) 40%, transparent 80%); /* Más transparente */
+    }
+
+    /* Rayos o Pétalos */
+    .bloom-core::before, .bloom-core::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: repeating-conic-gradient(
+            from 0deg,
+            var(--color-accent) 0%,
+            var(--color-accent-dark) 5%,
+            transparent 15%
+        );
+        opacity: 0.4; /* Más transparente */
+        border-radius: 50%;
+    }
+
+    .bloom-core::before {
+        transform: scale(1.1) rotate(0deg);
+        animation: ray-rotate 20s linear infinite;
+    }
+
+    .bloom-core::after {
+        transform: scale(0.9) rotate(45deg);
+        animation: ray-rotate-reverse 32s linear infinite;
+    }
+
+    /* Keyframes de la Flor */
+    @keyframes bloom-surge {
+        0% { transform: translate(-50%, -50%) scale(0.01); opacity: 0; }
+        50% { opacity: 0.8; filter: drop-shadow(0 0 120px rgba(255, 215, 0, 0.9)); }
+        100% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; } /* Opacidad final ligeramente menor */
+    }
+
+    @keyframes bloom-pulse {
+        0% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+        50% { transform: translate(-50%, -50%) scale(1.03); opacity: 0.9; }
+        100% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+    }
+
+    @keyframes ray-rotate {
+        to { transform: scale(1.1) rotate(360deg); }
+    }
+
+    @keyframes ray-rotate-reverse {
+        to { transform: scale(0.9) rotate(-360deg); }
+    }
+    /* FIN: EFECTO FLORECER/EXPLOSIÓN EXTRAVAGANTE */
+
+
+    .bg-section-dark {
+        background-color: var(--color-secondary-bg);
+    }
+
+    /* Tarjetas de Información */
+    .dresscode-card {
+        background: linear-gradient(145deg, var(--color-burgundy), #400010); /* Ajustado para ser un poco más claro */
+        border: 1px solid rgba(255, 215, 0, 0.2);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 10px rgba(255, 215, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .dresscode-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7), 0 0 20px var(--color-accent);
+    }
+
+    .divider-accent {
+        width: 150px;
+        height: 4px;
+        background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+        margin: 2rem auto;
+        border-radius: 2px;
+    }
+
+    /* ************************************************************ */
+    /* ⭐ ESTILO BOTONES EXTREMOS (GOLDEN GLOW & MIRROR EFFECT) ⭐ */
+    /* ************************************************************ */
+
+    .btn-gold-extravagant, .btn-whatsapp-extravagant {
+        position: relative;
+        overflow: hidden;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.85rem 2rem;
+        border-radius: 9999px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        transition: all 0.4s ease;
+        text-decoration: none;
+    }
+
+    /* --- Botón Dorado --- */
+    .btn-gold-extravagant {
+        background: linear-gradient(145deg, #FFEA7F 0%, #FFD700 40%, #B8860B 100%);
+        color: var(--color-primary);
+        border: 2px solid var(--color-accent);
+        box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+    }
+
+    .btn-gold-extravagant:hover {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 15px 40px rgba(255, 215, 0, 0.6), 0 0 20px var(--color-accent);
+    }
+
+    /* Efecto "Espejo" o "Luz Recorriendo" para Dorado */
+    .btn-gold-extravagant::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -150%;
+        width: 50%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.4);
+        transform: skewX(-30deg);
+        transition: left 0.5s;
+    }
+    .btn-gold-extravagant:hover::before {
+        left: 150%;
+    }
+
+    /* ************************************************************ */
+    /* --- BOTÓN WHATSAPP LUCIÉRNAGA (FIREFLY/DOTS) --- */
+    /* ************************************************************ */
+    .button-wrapper {
+        position: relative;
+        display: inline-block;
+        text-decoration: none;
+        transition: transform 0.3s ease;
+    }
+    .button-wrapper:hover {
+        transform: translateY(-3px) scale(1.02);
+    }
+
+    .btn-whatsapp-firefly {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.85rem 2rem;
+        border-radius: 9999px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        transition: all 0.4s ease;
+        text-decoration: none;
+
+        background: linear-gradient(145deg, #a7f3d0 0%, var(--color-whatsapp-green) 40%, #16a34a 100%);
+        color: white !important;
+        border: 2px solid #10b981 !important;
+        box-shadow: 0 8px 25px rgba(34, 197, 94, 0.4);
+
+        position: relative;
+        overflow: hidden;
+        z-index: 10;
+    }
+
+    /* Mantiene el efecto Espejo/Shimmer */
+    .btn-whatsapp-firefly::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -150%;
+        width: 50%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.6);
+        transform: skewX(-30deg);
+        transition: left 0.5s;
+    }
+    .button-wrapper:hover .btn-whatsapp-firefly::before {
+        left: 150%;
+    }
+
+    /* Estilos de las "Luciérnagas" (Dots) */
+    .dot {
+        display: block;
+        position: absolute;
+        transition: transform 0.8s ease-out, opacity 0.8s ease-out, width 0.8s ease-out, height 0.8s ease-out; /* Animación de tamaño y opacidad */
+        --rotatation: 0deg; --speed: 16s; --size: 4px;
+        --starting-x: 50px; --starting-y: 50px;
+        width: var(--size); height: var(--size);
+        transform: translate(var(--starting-x), var(--starting-y)) rotate(var(--rotatation));
+        pointer-events: none;
+        z-index: 5;
+        opacity: 0; /* Invisibles al inicio */
+    }
+    .dot::after {
+        content: "";
+        animation: hoverFirefly var(--speed) infinite, dimFirefly calc(var(--speed) / 2) infinite calc(var(--speed) / 3);
+        animation-play-state: paused;
+        display: block;
+        border-radius: 100%;
+        background: var(--color-whatsapp-green);
+        width: 100%; height: 100%;
+        box-shadow: 0px 0px 8px 0px var(--color-whatsapp-green), 0px 0px 4px 0px rgba(255, 255, 255, 0.75) inset, 0px 0px 2px 1px rgba(255, 255, 255, 0.26);
+    }
+
+    /* Posiciones y tamaños individuales (con opacidad inicial 0) */
+    .dot-1 { --rotatation: 0deg; --speed: 14s; --size: 6px; --starting-x: 30px; --starting-y: 20px; top: 2px; left: -16px; }
+    .dot-2 { --rotatation: 122deg; --speed: 16s; --size: 3px; --starting-x: 40px; --starting-y: 10px; top: 1px; left: 0px; }
+    .dot-3 { --rotatation: 39deg; --speed: 20s; --size: 4px; --starting-x: -10px; --starting-y: 20px; top: -8px; right: 14px; }
+    .dot-4 { --rotatation: 220deg; --speed: 18s; --size: 2px; --starting-x: -30px; --starting-y: -5px; bottom: 4px; right: -14px; }
+    .dot-5 { --rotatation: 190deg; --speed: 22s; --size: 5px; --starting-x: -40px; --starting-y: -20px; bottom: -6px; right: -3px; }
+    .dot-6 { --rotatation: 20deg; --speed: 15s; --size: 4px; --starting-x: 12px; --starting-y: -18px; bottom: -12px; left: 30px; }
+    .dot-7 { --rotatation: 300deg; --speed: 19s; --size: 3px; --starting-x: 6px; --starting-y: -20px; bottom: -16px; left: 44px; }
+
+    /* Efecto al pasar el cursor (Hover) */
+    .button-wrapper:hover .dot {
+        transform: translate(0, 0) rotate(var(--rotatation)); /* Mueve los puntos hacia el centro del wrapper */
+        opacity: 0.9; /* Se hacen visibles */
+        width: calc(var(--size) * 1.2); /* Ligeramente más grandes */
+        height: calc(var(--size) * 1.2);
+    }
+    .button-wrapper:hover .dot::after {
+        animation-play-state: running; /* Inicia la animación de movimiento y parpadeo */
+    }
+
+    /* Keyframes de movimiento y parpadeo */
+    @keyframes dimFirefly {
+        0% { opacity: 1; } 25% { opacity: 0.4; } 50% { opacity: 0.8; } 75% { opacity: 0.5; } 100% { opacity: 1; }
+    }
+    @keyframes hoverFirefly {
+        0% { transform: translate(0, 0); } 12% { transform: translate(3px, 1px); } 24% { transform: translate(-2px, 3px); } 37% { transform: translate(2px, -2px); } 55% { transform: translate(-1px, 0); } 74% { transform: translate(0, 2px); } 88% { transform: translate(-3px, -1px); } 100% { transform: translate(0, 0); }
+    }
+
+    /* ESTILOS CBU/REGALO (Efecto "Caja Fuerte") */
+    #hidden-cbu {
+        transition: max-height 0.7s cubic-bezier(0.5, 0, 0.5, 1), opacity 0.5s ease-in, padding 0.7s ease-in-out, margin-top 0.7s ease-in-out;
+        overflow: hidden; max-height: 0; opacity: 0; padding-top: 0 !important; padding-bottom: 0 !important; margin-top: 0 !important;
+        background-color: #30000a; /* Fondo interno más oscuro */
+        border-color: rgba(255, 215, 0, 0.5) !important;
+    }
+    #hidden-cbu.is-visible {
+        max-height: 500px; opacity: 1; padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; margin-top: 1.5rem !important;
+    }
+    #hidden-cbu span, #hidden-cbu li {
+        color: var(--color-text);
+    }
+
+    /* ESTILO CRONÓMETRO (El look "Caja de Cristal") */
+    .countdown-unit {
+        background: rgba(40, 0, 10, 0.7);
+        border: 1px solid var(--color-accent);
+        border-radius: 8px;
+        padding: 1rem 0.5rem;
+        min-width: 80px;
+        box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+    }
+    .countdown-unit .number {
+        font-size: 3rem;
+        font-weight: 700;
+        line-height: 1;
+        color: var(--color-accent);
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+    .countdown-unit .label {
+        font-size: 0.8rem;
+        margin-top: 0.5rem;
+        text-transform: uppercase;
+        font-weight: 500;
+        color: var(--color-text);
+        letter-spacing: 0.1em;
+    }
+
+    /* Estilos para el Control de Música (Panel oculto por defecto) */
+    #music-control-panel {
+        background-color: rgba(40, 0, 10, 0.95);
+        border-top: 2px solid var(--color-accent);
+        box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.5);
+    }
+    #volume-slider {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 8px;
+        background: #5c0a1a;
+        border-radius: 4px;
+        outline: none;
+        opacity: 0.7;
+        transition: opacity .2s;
+    }
+    #volume-slider:hover {
+        opacity: 1;
+    }
+    #volume-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--color-accent);
+        cursor: pointer;
+        box-shadow: 0 0 5px rgba(255, 215, 0, 0.8);
+    }
+    #volume-slider::-moz-range-thumb {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--color-accent);
+        cursor: pointer;
+        box-shadow: 0 0 5px rgba(255, 215, 0, 0.8);
+    }
+</style>
+</head>
+<body class="antialiased">
+
+    <audio id="background-music" loop>
+  <source src="floricienta.mp3" type="audio/mpeg">
+  Tu navegador no soporta el elemento de audio.
+</audio>
+
+
+<div class="firefly-container">
+        <div class="firefly-layer" id="layer1"></div>
+        <div class="firefly-layer" id="layer2"></div>
+        <div class="firefly-layer" id="layer3"></div>
+    </div>
+
+    <header class="text-center py-20 md:py-40">
+        <!-- MÁXIMA EXTRAVAGANCIA: NEBULOSA DORADA GIGANTE (Con z-index ajustado) --><div class="extravagant-bloom" style="z-index: 5;"> <!-- z-index 5 para que esté por encima de las flores pero por debajo del texto --><div class="bloom-core"></div>
+        </div>
+
+        <div class="section-container relative z-10"> <!-- z-index 10 para que el texto esté encima de todo --><h1 id="lara-name" class="text-7xl md:text-9xl font-extrabold leading-none text-metallic-gold with-shadow transform hover:scale-105 transition-transform duration-500">
+                LARA
+            </h1>
+
+            <p class="text-xl md:text-4xl mt-4 mb-8 font-light tracking-widest text-metallic-gold with-shadow">
+                MIS XV AÑOS
+            </p>
+            <div class="divider-accent"></div>
+
+            <p class="mt-8 max-w-3xl mx-auto text-2xl md:text-3xl font-light italic text-white/80" style="font-family: 'Dancing Script', cursive;">
+    "Hoy dejo atrás mi niñez para comenzar un nuevo camino lleno de sueños. Con la bendición de Dios y el amor de mi familia, celebro mis quince años. He aprendido que estar con quienes quiero es suficiente para ser feliz. Ten por seguro que el tiempo y estas letras se borrarán, pero el recuerdo de tu presencia esta noche nunca lo olvidaré. Por eso, quiero que me acompañes en esta noche tan especial para mí, donde un sueño, una ilusión y un recuerdo se harán eternos."
+</p>
+        </div>
+    </header>
+
+    <section class="section-container text-center bg-section-dark border-t border-b border-gray-900">
+        <h2 class="text-4xl md:text-6xl font-bold mb-12 text-metallic-gold with-shadow">¡Te Espero!</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="p-8 rounded-2xl dresscode-card shadow-lg">
+                <i data-lucide="calendar-check" class="w-12 h-12 text-accent mx-auto mb-4"></i>
+                <h3 class="text-2xl font-semibold mb-2 text-metallic-gold">FECHA</h3>
+                <p class="text-lg">Viernes, 5 de Diciembre de 2025</p>
+            </div>
+            <div class="p-8 rounded-2xl dresscode-card shadow-lg">
+                <i data-lucide="clock" class="w-12 h-12 text-accent mx-auto mb-4"></i>
+                <h3 class="text-2xl font-semibold mb-2 text-metallic-gold">HORA</h3>
+                <p class="text-lg">21:00 hs (Inicio) a 05:00 hs (Fin)</p>
+            </div>
+            <div class="p-8 rounded-2xl dresscode-card shadow-lg">
+                <i data-lucide="map-pin" class="w-12 h-12 text-accent mx-auto mb-4"></i>
+                <h3 class="text-2xl font-semibold mb-2 text-metallic-gold">LUGAR</h3>
+                <p class="text-xl font-bold">Salón Déjá Vu</p>
+                <p class="text-sm text-gray-400 mt-1">Calle Vidt, esq. Las Lilas, Mariano Acosta.</p>
+            </div>
+        </div>
+
+        <div class="mt-16">
+            <a target="_blank" href="https://www.google.com/maps/dir//D%C3%A9j%C3%A0+Vu+eventos.,+Vidt,+Mariano+Acosta,+Provincia+de+Buenos+Aires/@-34.7111517,-58.8664397,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x95bcebed633fdc0f:0x46c20b0804f0056d!2m2!1d-58.7839323!2d-34.7113901?entry=ttu" class="btn-gold-extravagant text-xl">
+                <i data-lucide="route" class="w-5 h-5 mr-3"></i>
+                LLEGAR A LA FIESTA
+            </a>
+        </div>
+    </section>
+
+    <section class="section-container text-center">
+        <h2 class="text-3xl md:text-5xl font-bold mb-6 text-metallic-gold">Faltan:</h2>
+        <div id="countdown" class="flex justify-center space-x-4 md:space-x-8">
+            <p class="text-2xl">Cargando...</p>
+        </div>
+        <p class="mt-6 text-xl italic text-white/70">para que este sueño se haga realidad.</p>
+    </section>
+
+    <section class="section-container text-center bg-section-dark border-t border-b border-gray-900">
+        <h2 class="text-4xl md:text-6xl font-bold mb-12 text-metallic-gold with-shadow">ETIQUETA</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+
+            <div class="dresscode-card p-8 rounded-2xl shadow-xl">
+                <i data-lucide="tshirt" class="w-12 h-12 text-accent mx-auto mb-4"></i>
+                <h4 class="text-3xl font-bold mb-4 text-metallic-gold">DRESS CODE</h4>
+                <p class="text-2xl font-extrabold mb-2 text-white">ELEGANTE SPORT </p>
+                <p class="text-sm text-gray-400 mt-3">
+                    Te invitamos a vestir con estilo y comodidad, acorde a la celebración.
+                </p>
+            </div>
+
+            <div class="dresscode-card p-8 rounded-2xl shadow-xl bg-[#200008] border-2 border-red-800">
+                <i data-lucide="ban" class="w-12 h-12 text-red-500 mx-auto mb-4"></i>
+                <h4 class="text-3xl font-bold mb-4 text-white">CÓDIGO DE COLOR</h4>
+                <p class="text-2xl font-extrabold mb-2 text-red-400">EVITAR: BORDÓ Y DORADO</p>
+                <p class="text-sm text-gray-400 mt-3">
+                    La Quinceañera y sus padres reservan estos tonos. Te agradecemos que elijas otros colores para la velada.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section-container text-center" id="regalo-section">
+        <div class="cbu max-w-xl mx-auto p-8 rounded-2xl dresscode-card shadow-2xl">
+            <i data-lucide="gift" class="w-12 h-12 text-accent mx-auto mb-4"></i>
+            <p class="text-lg mt-2 mb-6">El mejor regalo es tu presencia, pero si deseás obsequiarme algo...</p>
+
+            <button onclick="toggleCbu()" class="btn-gold-extravagant text-md">
+                <span id="cbu-btn-text">Ver más</span>
+            </button>
+
+
+
+<div id="hidden-cbu" class="rounded-xl border-2 mt-6">
+
+                <div class="p-6">
+
+                    <span class="text-2xl font-bold text-metallic-gold block mb-4 border-b pb-2 border-gray-700">DATOS BANCARIOS</span>
+
+                    <ul class="list-none p-0 m-0 text-left space-y-4">
+
+
+
+<li class="flex flex-col md:flex-row justify-between items-start md:items-center">
+                            <span class="font-semibold text-white/80">ALIAS:</span>
+                            <div class="flex items-center mt-1 md:mt-0">
+                                <span id="alias-value" class="font-mono text-xl text-accent border border-gray-700 px-3 py-1 rounded-md bg-black/30">Lara.87.MP</span>
+                                <button onclick="copyToClipboard('alias-value')" class="ml-3 p-2 bg-gray-800 rounded-full hover:bg-gray-700 transition duration-300" title="Copiar Alias">
+                                    <i data-lucide="copy" class="w-4 h-4 text-white"></i>
+                                </button>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+
+<div id="copy-toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 bg-green-700 text-white px-4 py-2 rounded-lg shadow-xl transition-all duration-300 opacity-0 transform translate-y-10 z-50">
+                ¡Copiado al portapapeles!
+            </div>
+        </div>
+    </section>
+
+    <section class="section-container text-center bg-section-dark border-t border-gray-900">
+    <h2 class="text-3xl md:text-5xl font-bold mb-8 text-metallic-gold">Confirmar Asistencia</h2>
+    <p class="mb-8 text-lg max-w-2xl mx-auto text-white/70">
+        Agradeceremos tu confirmación de presencia antes del <strong>15 de Noviembre de 2025</strong> para organizar tu lugar en la mesa. ¡Te esperamos!
+    </p>
+
+    <a href="https://wa.me/5491165549006" target="_blank" class="button-wrapper">
+        <span class="dot dot-1"></span>
+        <span class="dot dot-2"></span>
+        <span class="dot dot-3"></span>
+        <span class="dot dot-4"></span>
+        <span class="dot dot-5"></span>
+        <span class="dot dot-6"></span>
+        <span class="dot dot-7"></span>
+
+        <span class="btn-whatsapp-firefly text-xl shadow-lg">
+            <i data-lucide="message-square" class="w-6 h-6 mr-3"></i>
+            Confirmar por WhatsApp
+        </span>
+    </a>
+</section>
+
+    <footer class="text-center py-8 text-sm text-gray-500 border-t border-gray-900">
+        <p>&copy; 2025 Mis XV Años - Lara. Invitación Digital Exclusiva.</p>
+    </footer>
+
+
+    <script>
+        // Inicializa los iconos de Lucide
+        lucide.createIcons();
+
+        // ************************************************************
+        // --- LÓGICA DE FONDO DE LUCIÉRNAGAS DORADAS ---
+        // ************************************************************
+
+        // Función para generar la cadena de box-shadow con posiciones aleatorias
+        function generateBoxShadows(count, size, color) {
+            let shadows = [];
+            const maxDimension = 2000;
+
+            for (let i = 0; i < count; i++) {
+                const x = Math.floor(Math.random() * maxDimension);
+                const y = Math.floor(Math.random() * maxDimension);
+                const blur = (Math.random() * 2) + 1; // Más blur para un efecto más suave
+
+                shadows.push(`${x}px ${y}px ${blur}px 1px ${color}`);
+            }
+            return shadows.join(',');
+        }
+
+        // Función para configurar las capas de luciérnagas
+        function setupFireflies() {
+            const goldColor = 'var(--color-accent)';
+
+            const layers = [
+                { id: 'layer1', count: 600, size: '1px', duration: '60s' },
+                { id: 'layer2', count: 300, size: '2px', duration: '120s' },
+                { id: 'layer3', count: 150, size: '3px', duration: '180s' },
+            ];
+
+            const styleSheet = document.createElement('style');
+            let cssRules = `
+                /* Movimiento de las luces en el fondo */
+                @keyframes firefly-movement-slow {
+                    from { transform: translateY(0px); }
+                    to { transform: translateY(-2000px); }
+                }
+
+                .firefly-layer {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    background: transparent;
+                }
+                .firefly-layer::after {
+                    content: " ";
+                    position: absolute;
+                    top: 2000px;
+                    background: transparent;
+                }
+            `;
+
+            layers.forEach(layer => {
+                const shadow = generateBoxShadows(layer.count, layer.size, goldColor);
+
+                cssRules += `
+                    #${layer.id} {
+                        width: ${layer.size};
+                        height: ${layer.size};
+                        box-shadow: ${shadow};
+                        animation: firefly-movement-slow ${layer.duration} linear infinite;
+                    }
+                    #${layer.id}::after {
+                        width: ${layer.size};
+                        height: ${layer.size};
+                        box-shadow: ${shadow};
+                    }
+                `;
+            });
+
+            document.head.appendChild(styleSheet);
+            styleSheet.textContent += cssRules;
+        }
+
+        // ************************************************************
+        // --- LÓGICA DE CBU/REGALO Y COPIADO AL PORTAPAPELES ---
+        // ************************************************************
+
+        function toggleCbu() {
+            const cbuDetails = document.getElementById('hidden-cbu');
+            const btnText = document.getElementById('cbu-btn-text');
+
+            const isVisible = cbuDetails.classList.toggle('is-visible');
+
+            btnText.textContent = isVisible ? 'Ocultar Datos' : 'Ver más';
+        }
+
+        // Función de Copiado al Portapapeles
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            const textToCopy = element.textContent;
+
+            let fieldName = 'Dato';
+            if (elementId.includes('alias')) {
+                fieldName = 'Alias';
+            } else if (elementId.includes('cbu')) {
+                fieldName = 'CBU/CVU';
+            } else if (elementId.includes('dni')) {
+                fieldName = 'DNI';
+            }
+
+            const tempInput = document.createElement('textarea');
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+
+            try {
+                // Usamos document.execCommand('copy') por si navigator.clipboard no está disponible en el iFrame
+                document.execCommand('copy');
+
+                const toast = document.getElementById('copy-toast');
+                toast.textContent = `¡${fieldName} copiado!`;
+                toast.classList.remove('opacity-0', 'translate-y-10');
+                toast.classList.add('opacity-100', 'translate-y-0');
+
+                setTimeout(() => {
+                    toast.classList.remove('opacity-100', 'translate-y-0');
+                    toast.classList.add('opacity-0', 'translate-y-10');
+                }, 2000);
+            } catch (err) {
+                console.error('No se pudo copiar el texto: ', err);
+            }
+
+            document.body.removeChild(tempInput);
+        }
+
+
+        // ************************************************************
+        // --- LÓGICA DEL CRONÓMETRO MEJORADO ---
+        // ************************************************************
+        const finalDate = new Date("Dec 5, 2025 21:00:00").getTime();
+
+        const updateCountdown = () => {
+            const now = new Date().getTime();
+            const distance = finalDate - now;
+            const countdownElement = document.getElementById("countdown");
+
+            if (distance < 0) {
+                countdownElement.innerHTML = `<span class="text-4xl md:text-5xl text-accent font-bold">¡LA FIESTA HA COMENZADO!</span>`;
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Función auxiliar para renderizar cada unidad
+            const renderUnit = (value, label) => `
+                <div class="countdown-unit">
+                    <span class="number">${String(value).padStart(2, '0')}</span>
+                    <span class="label">${label}</span>
+                </div>
+            `;
+
+            countdownElement.innerHTML = `
+                ${renderUnit(days, 'DÍAS')}
+                ${renderUnit(hours, 'HORAS')}
+                ${renderUnit(minutes, 'MINUTOS')}
+                ${renderUnit(seconds, 'SEGUNDOS')}
+            `;
+        }
+
+        const intervalId = setInterval(updateCountdown, 1000);
+
+        // Inicialización
+        window.onload = () => {
+            // Música de fondo
+const backgroundMusic = document.getElementById('background-music');
+if (backgroundMusic) {
+  backgroundMusic.volume = 0.10; // 65% de volumen
+  
+  // Intentar reproducir automáticamente
+  const playAudio = () => {
+    backgroundMusic.play().catch(error => {
+      console.log("La reproducción automática fue bloqueada: ", error);
+      // Podríamos mostrar un botón para que el usuario active el audio
+    });
+  };
+  
+  // Intentar reproducir inmediatamente
+  playAudio();
+  
+  // También intentar después de una interacción del usuario
+  document.addEventListener('click', function() {
+    if (backgroundMusic.paused) {
+      playAudio();
+    }
+  }, { once: true });
+}
+            setupFireflies();
+            updateCountdown();
+            lucide.createIcons();
+            // Llama a la función de chequeo de admin al cargar la página
+        };
+    </script>
+</body>
+</html>
